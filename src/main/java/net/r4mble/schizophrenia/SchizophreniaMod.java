@@ -25,6 +25,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.r4mble.schizophrenia.common.Schizo;
+import net.r4mble.schizophrenia.common.init.ModItemTabs;
+import net.r4mble.schizophrenia.common.init.ModItems;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -63,18 +65,10 @@ public class SchizophreniaMod {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
-        BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
-        ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so tabs get registered
-        CREATIVE_MODE_TABS.register(modEventBus);
-
+        ModRegister(modEventBus);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
 
     }
 
@@ -94,6 +88,11 @@ public class SchizophreniaMod {
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    private void ModRegister(IEventBus eventBus) {
+        ModItemTabs.TABS.register(eventBus);
+        ModItems.ITEMS.register(eventBus);
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

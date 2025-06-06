@@ -1,17 +1,57 @@
 package net.r4mble.schizophrenia.common;
 
 public class Schizo {
-    public int progress = 0;
+    private float tickValue = 0;
+    private float progress = 0;
 
-    public void addProgress(int n) {
+    public void addProgress(float n) {
         progress += n;
+        validateData();
     }
 
-    public void removeProgress(int n) {
+    public void removeProgress(float n) {
         progress -= n;
+        validateData();
     }
 
-    public void setProgress(int n) {
+    public float getProgress() {
+        return progress;
+    }
+
+    public void setProgress(float n) {
         progress = n;
+    }
+
+    public void addTickValue(float n) {
+        tickValue += n;
+        validateData();
+    }
+
+    public void removeTickValue(float n) {
+        tickValue -= n;
+        validateData();
+    }
+
+    public float getTickValue() {
+        return tickValue;
+    }
+
+    public void setTickValue(float n) {
+        tickValue = n;
+    }
+
+
+    private void validateData() {
+        if (progress > 100) {
+            progress = 100;
+        } else if (progress < -100) {
+            progress = -100;
+        }
+
+        if (tickValue > 100) {
+            tickValue = 100;
+        } else if (tickValue < -100) {
+            tickValue = -100;
+        }
     }
 }
