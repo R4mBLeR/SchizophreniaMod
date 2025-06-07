@@ -15,6 +15,7 @@ public class HumanMeat extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
         if (!world.isClientSide() && entity instanceof Player) {
+            SchizophreniaMod.schizo.addProgress(50);
             SchizophreniaMod.schizo.addTickValue(1);
         }
         return super.finishUsingItem(stack, world, entity);

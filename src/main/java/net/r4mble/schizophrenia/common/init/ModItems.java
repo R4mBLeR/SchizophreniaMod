@@ -1,6 +1,8 @@
 package net.r4mble.schizophrenia.common.init;
 
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -15,8 +17,23 @@ public class ModItems {
             () -> new HumanMeat(
                     new Item.Properties()
                             .food(new FoodProperties.Builder()
-                                    .nutrition(1)    // Сколько восстанавливает голода
+                                    .nutrition(5)    // Сколько восстанавливает голода
                                     .saturationMod(0.2f)  // Насыщение
                                     .build())
+            ));
+
+    public static final RegistryObject<Item> FOIL_HAT = ITEMS.register("foil_hat",
+            () -> new ArmorItem(
+                    ArmorMaterials.IRON,
+                    ArmorItem.Type.HELMET,
+                    new Item.Properties()
+                            .durability(500)
+            ));
+
+    public static final RegistryObject<Item> GLASSES_OF_TRUE = ITEMS.register("glasses_of_true",
+            () -> new ArmorItem(
+                    ArmorMaterials.IRON,
+                    ArmorItem.Type.HELMET,
+                    new Item.Properties()
             ));
 }

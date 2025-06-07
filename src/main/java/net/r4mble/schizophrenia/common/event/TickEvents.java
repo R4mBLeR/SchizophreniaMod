@@ -2,26 +2,32 @@ package net.r4mble.schizophrenia.common.event;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.r4mble.schizophrenia.SchizophreniaMod;
+import net.r4mble.schizophrenia.common.init.ModItems;
 import net.r4mble.schizophrenia.common.util.ModParametrs;
 
 @Mod.EventBusSubscriber(modid = SchizophreniaMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ServerModIvents {
+public class TickEvents {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         // Проверяем, что это фаза START (можно также использовать END, но важно выбрать одну)
         if (event.phase == TickEvent.Phase.END) {
             Player player = event.player;
-            if (player.tickCount % 20 == 0) {
-                SchizophreniaMod.schizo.addProgress(SchizophreniaMod.schizo.getTickValue());
-                player.sendSystemMessage(Component.literal(String.valueOf(SchizophreniaMod.schizo.getProgress())));
+
+            float schizoResistance = 0;
+
+            if (event.player.getItemBySlot(EquipmentSlot.HEAD).getItem() == ModItems.FOIL_HAT.get()) {
+                schizoResistance = 0.3f;
             }
-            if (SchizophreniaMod.schizo.getProgress() == 100) {
-                player.setHealth(10f);
+
+            if (player.tickCount % 20 == 0) {
+                SchizophreniaMod.schizo.addProgress(SchizophreniaMod.schizo.getTickValue() * (1f - schizoResistance));
+                player.sendSystemMessage(Component.literal(String.valueOf(SchizophreniaMod.schizo.getProgress())));
             }
         }
     }

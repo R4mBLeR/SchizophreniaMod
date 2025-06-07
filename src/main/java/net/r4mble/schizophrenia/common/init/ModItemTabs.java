@@ -17,6 +17,7 @@ public class ModItemTabs {
                     .title(Component.translatable("itemGroup.mod_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.HUMAN_MEAT.get());
+                        pOutput.accept(ModItems.FOIL_HAT.get());
                     })
                     .build());
 }
