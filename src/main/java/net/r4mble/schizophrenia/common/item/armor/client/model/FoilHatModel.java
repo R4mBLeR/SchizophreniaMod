@@ -15,7 +15,7 @@ import net.r4mble.schizophrenia.SchizophreniaMod;
 public class FoilHatModel extends HumanoidArmorModel<LivingEntity> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-            new ResourceLocation(SchizophreniaMod.MODID, "foil_hat_3d"), "main"
+            new ResourceLocation(SchizophreniaMod.MODID, "foil_hat"), "main"
     );
 
     public FoilHatModel(ModelPart root) {
