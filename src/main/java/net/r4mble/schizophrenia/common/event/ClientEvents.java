@@ -7,10 +7,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.r4mble.schizophrenia.SchizophreniaMod;
 import net.r4mble.schizophrenia.common.item.armor.client.model.FoilHatModel;
 
-@Mod.EventBusSubscriber(modid = SchizophreniaMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = SchizophreniaMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        SchizophreniaMod.LOGGER.info("Registering foil hat model");
         event.registerLayerDefinition(FoilHatModel.LAYER_LOCATION, FoilHatModel::createBodyLayer);
     }
 }
