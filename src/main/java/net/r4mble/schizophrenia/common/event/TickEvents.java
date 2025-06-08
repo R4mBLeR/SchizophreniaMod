@@ -1,6 +1,5 @@
 package net.r4mble.schizophrenia.common.event;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -26,8 +25,7 @@ public class TickEvents {
             }
 
             if (player.tickCount % 20 == 0) {
-                SchizophreniaMod.schizo.addProgress(SchizophreniaMod.schizo.getTickValue() * (1f - schizoResistance));
-                player.sendSystemMessage(Component.literal(String.valueOf(SchizophreniaMod.schizo.getProgress())));
+                SchizophreniaMod.schizoPlayers.get(player.getUUID()).addProgress(SchizophreniaMod.schizoPlayers.get(player.getUUID()).getTickValue() * (1f - schizoResistance));
             }
         }
     }
@@ -39,7 +37,7 @@ public class TickEvents {
             if (time % 24000 == 0) { // Наступило утро
                 for (Player player : level.players()) {
                     if (!player.isSleeping()) {
-                        SchizophreniaMod.schizo.addTickValue(ModParametrs.NOT_SLEEPING_FINE);
+                        SchizophreniaMod.schizoPlayers.get(player.getUUID()).addTickValue(ModParametrs.NOT_SLEEPING_FINE);
                     }
                 }
             }

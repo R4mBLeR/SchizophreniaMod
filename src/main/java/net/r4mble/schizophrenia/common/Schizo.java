@@ -1,8 +1,13 @@
 package net.r4mble.schizophrenia.common;
 
 public class Schizo {
-    private float tickValue = 0;
-    private float progress = 0;
+    private float tickValue;
+    private float progress;
+
+    public Schizo() {
+        this.tickValue = 0;
+        this.progress = 0;
+    }
 
     public void addProgress(float n) {
         progress += n;

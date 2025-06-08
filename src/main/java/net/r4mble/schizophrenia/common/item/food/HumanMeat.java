@@ -1,7 +1,6 @@
 package net.r4mble.schizophrenia.common.item.food;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -13,11 +12,12 @@ public class HumanMeat extends Item {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
-        if (!world.isClientSide() && entity instanceof Player) {
-            SchizophreniaMod.schizo.addProgress(50);
-            SchizophreniaMod.schizo.addTickValue(1);
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+
+        if (!level.isClientSide()) {
+            SchizophreniaMod.schizoPlayers.get(entity.getUUID()).addProgress(50);
+            SchizophreniaMod.schizoPlayers.get(entity.getUUID()).addTickValue(1);
         }
-        return super.finishUsingItem(stack, world, entity);
+        return super.finishUsingItem(stack, level, entity);
     }
 }

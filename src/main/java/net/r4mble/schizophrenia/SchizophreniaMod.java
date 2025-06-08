@@ -29,6 +29,9 @@ import net.r4mble.schizophrenia.common.init.ModItemTabs;
 import net.r4mble.schizophrenia.common.init.ModItems;
 import org.slf4j.Logger;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(SchizophreniaMod.MODID)
 public class SchizophreniaMod {
@@ -57,7 +60,7 @@ public class SchizophreniaMod {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static Schizo schizo;
+    public static HashMap<UUID, Schizo> schizoPlayers;
 
     public SchizophreniaMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
@@ -103,7 +106,7 @@ public class SchizophreniaMod {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-            schizo = new Schizo();
+            schizoPlayers = new HashMap<>();
         }
     }
 }

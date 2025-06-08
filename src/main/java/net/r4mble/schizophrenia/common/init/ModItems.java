@@ -8,6 +8,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.r4mble.schizophrenia.SchizophreniaMod;
+import net.r4mble.schizophrenia.common.item.Schizometer;
+import net.r4mble.schizophrenia.common.item.armor.FoilHat;
 import net.r4mble.schizophrenia.common.item.food.HumanMeat;
 
 public class ModItems {
@@ -23,7 +25,7 @@ public class ModItems {
             ));
 
     public static final RegistryObject<Item> FOIL_HAT = ITEMS.register("foil_hat",
-            () -> new ArmorItem(
+            () -> new FoilHat(
                     ArmorMaterials.IRON,
                     ArmorItem.Type.HELMET,
                     new Item.Properties()
@@ -35,5 +37,11 @@ public class ModItems {
                     ArmorMaterials.IRON,
                     ArmorItem.Type.HELMET,
                     new Item.Properties()
+            ));
+
+    public static final RegistryObject<Item> SCHIZOMETER = ITEMS.register("schizometer",
+            () -> new Schizometer(
+                    new Item.Properties()
+                            .durability(50)
             ));
 }

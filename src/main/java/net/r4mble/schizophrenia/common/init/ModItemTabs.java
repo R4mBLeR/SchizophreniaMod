@@ -18,6 +18,8 @@ public class ModItemTabs {
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.HUMAN_MEAT.get());
                         pOutput.accept(ModItems.FOIL_HAT.get());
+                        pOutput.accept(ModItems.GLASSES_OF_TRUE.get());
+                        pOutput.accept(ModItems.SCHIZOMETER.get());
                     })
                     .build());
 }
