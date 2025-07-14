@@ -2,6 +2,8 @@ package net.r4mble.schizophrenia.common.item.armor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
@@ -11,6 +13,8 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.r4mble.schizophrenia.common.item.armor.client.model.FoilHatModel;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class FoilHat extends ArmorItem {
@@ -25,14 +29,20 @@ public class FoilHat extends ArmorItem {
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(
                     LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> original
             ) {
-                // Возвращаем вашу 3D-модель для слота HEAD
-                if (slot == EquipmentSlot.HEAD) {
-                    return new FoilHatModel(
-                            Minecraft.getInstance().getEntityModels().bakeLayer(FoilHatModel.LAYER_LOCATION)
-                    );
-                }
-                return original; // Для других слотов используем стандартную модель
+                return new HumanoidModel<>(new ModelPart(Collections.emptyList(),
+                        Map.of("head", new FoilHatModel(Minecraft.getInstance().getEntityModels().bakeLayer(FoilHatModel.LAYER_LOCATION)).head,
+                                "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()))));
             }
         });
+    }
+
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        return "schizophrenia:textures/entities/foil_hat.png";
     }
 }
